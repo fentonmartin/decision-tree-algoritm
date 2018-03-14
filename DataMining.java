@@ -90,6 +90,7 @@ public class DataMining {
         
         // Iterasi Probability Class
         String[] dataTemp = new String[10];
+        double[] probValue = new double[uniqueValue];
         for (int j=0; j<8; j++) {
                 dataTemp[j] = data[j][3];
             }
@@ -98,13 +99,25 @@ public class DataMining {
             // Class data if class = col 3
             int value = countValue(dataTemp, unique[i], uniqueValue);
             double prob = (value*1.0)/8;
+            probValue[i] = prob;
             System.out.print("Probability " + unique[i] +" : " + value +
                     "/8 = "+ prob + "\n");
-        }
+        }   
         
+        // Gini Index
+        System.out.print("Gini Index = 1 - (");
+        for (int i = 0; i < uniqueValue; i++) {
+            System.out.print(probValue[i] + "^2");
+            if (i < uniqueValue-1)
+            System.out.print(" + ");
+        }
+        System.out.print(")\n");
+        double giniIndex = 0;
+        for (int i = 0; i < uniqueValue; i++) {
+            giniIndex = giniIndex + (probValue[i] * probValue[i]);
+        }
+        System.out.print("Gini Index = " + (1 - giniIndex) + "\n");
     }
-    
-    
     
     public static int countValue(String[] data, String value, int uniqueValue) {
         int count = 0;
