@@ -117,6 +117,30 @@ public class DataMining {
             giniIndex = giniIndex + (probValue[i] * probValue[i]);
         }
         System.out.print("Gini Index = " + (1 - giniIndex) + "\n");
+        
+        // Classification Error Index
+        System.out.print("Classification Error Index = 1 - Max{");
+        for (int i = 0; i < uniqueValue; i++) {
+            System.out.print(probValue[i]);
+            if (i < uniqueValue-1)
+            System.out.print(", ");
+        }
+        System.out.print("}\n");
+        System.out.print("Classification Error Index = 1 - " + 
+                getMax(probValue)+ "\n");
+        System.out.print("Classification Error Index = " + 
+                (1 - getMax(probValue))+ "\n");
+        
+    }
+    
+    public static double getMax(double[] inputArray){ 
+        double maxValue = inputArray[0]; 
+        for(int i=1;i < inputArray.length;i++){ 
+          if(inputArray[i] > maxValue){ 
+             maxValue = inputArray[i]; 
+          } 
+        } 
+        return maxValue; 
     }
     
     public static int countValue(String[] data, String value, int uniqueValue) {
